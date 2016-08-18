@@ -58,6 +58,7 @@ class PyMincHeader():
 
         m = re.search(r'\n.*' + re.escape(headerAttribute) + '.*\n',str(self.headerCache,'utf-8'))
 
+        # If no match is found, m should be None
         if m:
             self.headerAttribute = headerAttribute
             m = re.search(r'[[a-z]]*.*;', m.group()) # Remove escape characters of line
@@ -75,8 +76,14 @@ class PyMincHeader():
 
             # Fetch full attribute name
             m = re.search(r'\w*:\w*', self.matchedLine)
-            matchedAttributeString = m.group()
-            self.attribute = matchedAttributeString
+            # If no match is found, m should be None
+            if m:
+                matchedAttributeString = m.group()
+                self.attribute = matchedAttributeString
+            else:
+                m = re.search(r'\w*', self.matchedLine)
+                matchedAttributeString = m.group()
+                self.attribute = matchedAttributeString
 
         else:
             self.__resetobj()
