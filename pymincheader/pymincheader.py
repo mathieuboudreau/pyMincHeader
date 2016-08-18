@@ -3,7 +3,26 @@ import subprocess
 import re
 
 class PyMincHeader():
+    '''PyMincHeader: Class to fetch and hold mincheader information.
 
+    --args--
+        filename: string containing full filename of minc file
+
+    --methods--
+        search: parses header of minc file for a single occurence of headerAttribute
+
+            --args--
+                headerAttribute: string of an attribute-of-interest from the header file
+                                **must only have a single occurance, be as exact as possible**
+                                e.g. for the line: \n\t\tacquisition:flip_angle = 9. ;\n
+                                     angle, flip_angle, or acquisition:flip_angle would be appropriate,
+                                     but acquisition:flip_angle would be best since angle and flip_angle
+                                     may have multiple occuranges.
+
+            --return--
+                type: dict
+                    format: {'attribute': self.attribute, 'value':self.value, 'line':self.matchedLine}
+    '''
     def __init__(self,fileName):
 
         if not os.path.isfile(fileName):
@@ -18,6 +37,22 @@ class PyMincHeader():
             self.attribute       = None
 
     def search(self, headerAttribute):
+        '''
+            search: parses header of minc file for a single occurence of headerAttribute
+
+                --args--
+                    headerAttribute: string of an attribute-of-interest from the header file
+                                     **must only have a single occurance, be as exact as possible**
+
+                                     e.g. for the line: \n\t\tacquisition:flip_angle = 9. ;\n
+                                     angle, flip_angle, or acquisition:flip_angle would be appropriate,
+                                     but acquisition:flip_angle would be best since angle and flip_angle
+                                     may have multiple occuranges.
+
+                --return--
+                    type: dict
+                        format: {'attribute': self.attribute, 'value':self.value, 'line':self.matchedLine}
+        '''
 
         if not self.headerCache:
             # Need the with-as to avoid ResourceWarning: unclosed file [...] warning
