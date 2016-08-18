@@ -30,11 +30,7 @@ class PyMincHeader():
         else:
             self.fileName  = fileName
             self.headerCache     = None
-            self.headerAttribute = None
-            self.matchedLine     = None
-            self.stringValue     = None
-            self.value           = None
-            self.attribute       = None
+            self._resetobj()
 
     def search(self, headerAttribute):
         '''
@@ -81,10 +77,14 @@ class PyMincHeader():
             self.attribute = matchedAttributeString
 
         else:
-            self.headerAttribute = None
-            self.matchedLine     = None
-            self.stringValue     = None
-            self.value           = None
-            self.attribute       = None
+            self._resetobj()
+
 
         return {'attribute': self.attribute, 'value':self.value, 'line':self.matchedLine}
+
+    def _resetobj(self):
+        self.headerAttribute = None
+        self.matchedLine     = None
+        self.stringValue     = None
+        self.value           = None
+        self.attribute       = None
