@@ -14,40 +14,41 @@ class PyMincHeader():
             --args--
                 headerAttribute: string of an attribute-of-interest from the header file
                                 **must only have a single occurance, be as exact as possible**
+
                                 e.g. for the line: \n\t\tacquisition:flip_angle = 9. ;\n
                                      angle, flip_angle, or acquisition:flip_angle would be appropriate,
                                      but acquisition:flip_angle would be best since angle and flip_angle
-                                     may have multiple occuranges.
+                                     may have multiple occurances.
 
             --return--
                 type: dict
                     format: {'attribute': self.attribute, 'value':self.value, 'line':self.matchedLine}
     '''
+
     def __init__(self,fileName):
 
         if not os.path.isfile(fileName):
             raise Exception('PyMincHeader.__init__(): ' + fileName + ' does not exist')
         else:
-            self.fileName  = fileName
-            self.headerCache     = None
+            self.fileName    = fileName
+            self.headerCache = None
             self.__resetobj()
 
     def search(self, headerAttribute):
-        '''
-            search: parses header of minc file for a single occurence of headerAttribute
+        '''PyMincHeader.search: parses header of minc file for a single occurence of headerAttribute
 
-                --args--
-                    headerAttribute: string of an attribute-of-interest from the header file
-                                     **must only have a single occurance, be as exact as possible**
+        --args--
+            headerAttribute: string of an attribute-of-interest from the header file
+                             **must only have a single occurance, be as exact as possible**
 
-                                     e.g. for the line: \n\t\tacquisition:flip_angle = 9. ;\n
-                                     angle, flip_angle, or acquisition:flip_angle would be appropriate,
-                                     but acquisition:flip_angle would be best since angle and flip_angle
-                                     may have multiple occuranges.
+                             e.g. for the line: \n\t\tacquisition:flip_angle = 9. ;\n
+                             angle, flip_angle, or acquisition:flip_angle would be appropriate,
+                             but acquisition:flip_angle would be best since angle and flip_angle
+                             may have multiple occurances.
 
-                --return--
-                    type: dict
-                        format: {'attribute': self.attribute, 'value':self.value, 'line':self.matchedLine}
+        --return--
+             type: dict
+                 format: {'attribute': self.attribute, 'value':self.value, 'line':self.matchedLine}
         '''
 
         if not self.headerCache:
@@ -58,7 +59,7 @@ class PyMincHeader():
         m = re.search(r'\n.*' + re.escape(headerAttribute) + '.*\n',str(self.headerCache,'utf-8'))
 
         if m:
-            self.headerAttribute    = headerAttribute
+            self.headerAttribute = headerAttribute
             m = re.search(r'[[a-z]]*.*;', m.group()) # Remove escape characters of line
             self.matchedLine = m.group()
 
@@ -79,8 +80,7 @@ class PyMincHeader():
         else:
             self.__resetobj()
 
-
-        return {'attribute': self.attribute, 'value':self.value, 'line':self.matchedLine}
+        return {'attribute': self.attribute, 'value': self.value, 'line': self.matchedLine}
 
     def __resetobj(self):
         self.headerAttribute = None
