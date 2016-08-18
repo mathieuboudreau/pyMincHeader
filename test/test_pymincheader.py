@@ -16,6 +16,9 @@ class PyMincHeaderTest(unittest.TestCase):
         self.nonExistingAttribute    = 'thisIS_Afake_At1ribute__/'
         self.searchOutputNonExistingExample = {'attribute': None, 'value': None, 'line': None}
 
+        self.floatAttributeNoColonExample    = 'xspace'
+        self.searchOutputFloatAttributeNoColonFloatExample = {'attribute': 'xspace', 'value': 256, 'line': 'xspace = 256 ;'}
+
     def tearDown(self):
         pass
 
@@ -57,3 +60,10 @@ class PyMincHeaderTest(unittest.TestCase):
 
         for key in result.keys():
             self.assertEqual(result[key], self.searchOutputNonExistingExample[key])
+
+    def test_that_verifies_output_values_of_float_attribute_without_no_colon_search_match_known_case(self):
+        demoHeader = PyMincHeader('demo/demo.mnc')
+        result = demoHeader.search(self.floatAttributeNoColonExample)
+
+        for key in result.keys():
+            self.assertEqual(result[key], self.searchOutputFloatAttributeNoColonFloatExample[key])
