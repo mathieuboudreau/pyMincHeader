@@ -59,7 +59,7 @@ class PyMincHeader():
 
         if m:
             self.headerAttribute    = headerAttribute
-            m = re.search('[[a-z]]*.*;', m.group()) # Remove escape characters of line
+            m = re.search(r'[[a-z]]*.*;', m.group()) # Remove escape characters of line
             self.matchedLine = m.group()
 
             # Fetch value
