@@ -70,7 +70,14 @@ class PyMincHeader():
                                                         # if they want to.
                                                         #
                                                         # 2 -> "= ", -1 -> " "
-            self.value= float(self.stringValue)
+            # Convert matched string value to appropriate type
+            try:
+                float(self.stringValue)
+            except:
+                self.value = self.stringValue[1:-1]
+            else:
+                self.value = float(self.stringValue)
+            
 
             # Fetch full attribute name
             m = re.search(r'\w*:\w*', self.matchedLine)

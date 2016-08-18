@@ -10,6 +10,9 @@ class PyMincHeaderTest(unittest.TestCase):
         self.floatAttributeExample    = 'repetition'
         self.searchOutputFloatExample = {'attribute': 'acquisition:repetition_time', 'value': 2.3, 'line': 'acquisition:repetition_time = 2.3 ;'}
 
+        self.stringAttributeExample   = 'series_description'
+        self.searchOutputStringExample = {'attribute': 'acquisition:series_description', 'value': 'MPRAGE ADNI_iPAT2 ', 'line': 'acquisition:series_description = "MPRAGE ADNI_iPAT2 " ;'}
+
         self.nonExistingAttribute    = 'thisIS_Afake_At1ribute__/'
         self.searchOutputNonExistingExample = {'attribute': None, 'value': None, 'line': None}
 
@@ -39,6 +42,14 @@ class PyMincHeaderTest(unittest.TestCase):
 
         for key in result.keys():
             self.assertEqual(result[key], self.searchOutputNonExistingExample[key])
+
+    def test_that_verifies_output_values_of_float_attribute_search_match_known_case(self):
+        demoHeader = PyMincHeader('demo/demo.mnc')
+        result = demoHeader.search(self.stringAttributeExample)
+
+        for key in result.keys():
+            self.assertEqual(result[key], self.searchOutputStringExample[key])
+
 
     def test_that_verifies_output_values_of_float_attribute_search_match_when_no_match_occurs(self):
         demoHeader = PyMincHeader('demo/demo.mnc')
