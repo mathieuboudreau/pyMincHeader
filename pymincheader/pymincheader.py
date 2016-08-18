@@ -26,7 +26,6 @@ class PyMincHeader():
     '''
 
     def __init__(self,fileName):
-
         if not os.path.isfile(fileName):
             raise Exception('PyMincHeader.__init__(): ' + fileName + ' does not exist')
         else:
@@ -98,7 +97,6 @@ class PyMincHeader():
         self.attribute       = None
 
     def __convertValueStringToType(self):
-
         try:
             float(self.stringValue)
         except:

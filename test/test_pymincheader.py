@@ -54,7 +54,6 @@ class PyMincHeaderTest(unittest.TestCase):
             self.assertEqual(result[key], self.searchOutputStringExample[key])
 
     def test_that_verifies_output_values_of_float_attribute_search_match_when_no_match_occurs(self):
-
         demoHeader = PyMincHeader('demo/demo.mnc')
         result = demoHeader.search(self.nonExistingAttribute)
 
