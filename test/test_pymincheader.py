@@ -38,22 +38,22 @@ class PyMincHeaderTest(unittest.TestCase):
 
     def test_that_verifies_output_values_of_float_attribute_search_match_known_case(self):
         demoHeader = PyMincHeader('demo/demo.mnc')
-        result = demoHeader.search(self.nonExistingAttribute)
+        result = demoHeader.search(self.floatAttributeExample)
 
         for key in result.keys():
-            self.assertEqual(result[key], self.searchOutputNonExistingExample[key])
+            self.assertEqual(result[key], self.searchOutputFloatExample[key])
 
-    def test_that_verifies_output_values_of_float_attribute_search_match_known_case(self):
+    def test_that_verifies_output_values_of_string_attribute_search_match_known_case(self):
         demoHeader = PyMincHeader('demo/demo.mnc')
         result = demoHeader.search(self.stringAttributeExample)
 
         for key in result.keys():
             self.assertEqual(result[key], self.searchOutputStringExample[key])
 
-
     def test_that_verifies_output_values_of_float_attribute_search_match_when_no_match_occurs(self):
+
         demoHeader = PyMincHeader('demo/demo.mnc')
-        result = demoHeader.search(self.floatAttributeExample)
+        result = demoHeader.search(self.nonExistingAttribute)
 
         for key in result.keys():
-            self.assertEqual(result[key], self.searchOutputFloatExample[key])
+            self.assertEqual(result[key], self.searchOutputNonExistingExample[key])
