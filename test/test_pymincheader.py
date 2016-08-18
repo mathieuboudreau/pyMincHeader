@@ -6,6 +6,8 @@ class PyMincHeaderTest(unittest.TestCase):
     def setUp(self):
         self.badFileName = '_(238F.ds&.'
         self.goodFileName = 'demo/demo.mnc'
+        self.floatAttributeExample    = 'repetition'
+        self.searchOutputFloatExample = {'attribute': 'acquisition:repetition_time', 'value': 2.3, 'line': 'acquisition:repetition_time = 2.3 ;'}
     def tearDown(self):
         pass
 
@@ -15,3 +17,15 @@ class PyMincHeaderTest(unittest.TestCase):
     def test_that_good_filename_stores_is_stored_on_init(self):
         demoHeader = PyMincHeader(self.goodFileName)
         self.assertEqual(demoHeader.fileName, 'demo/demo.mnc')
+
+    def test_that_verifies_output_keys_of_search_method_match_expected_keys(self):
+        demoHeader = PyMincHeader('demo/demo.mnc')
+        result = demoHeader.search(self.floatAttributeExample)
+        self.assertEqual(result.keys(), self.searchOutputFloatExample.keys())
+
+    def test_that_verifies_output_values_of_float_attribute_search_match_known_case(self):
+        demoHeader = PyMincHeader('demo/demo.mnc')
+        result = demoHeader.search(self.floatAttributeExample)
+
+        for key in result.keys():
+            self.assertEqual(result[key], self.searchOutputFloatExample[key])
