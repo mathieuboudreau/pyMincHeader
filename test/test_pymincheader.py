@@ -13,11 +13,14 @@ class PyMincHeaderTest(unittest.TestCase):
         self.stringAttributeExample   = 'series_description'
         self.searchOutputStringExample = {'attribute': 'acquisition:series_description', 'value': 'MPRAGE ADNI_iPAT2 ', 'line': 'acquisition:series_description = "MPRAGE ADNI_iPAT2 " ;'}
 
+        self.intAttributeExample    = 'xspace'
+        self.searchOutputIntExample = {'attribute': 'xspace', 'value': 256, 'line': 'xspace = 256 ;'}
+
         self.nonExistingAttribute    = 'thisIS_Afake_At1ribute__/'
         self.searchOutputNonExistingExample = {'attribute': None, 'value': None, 'line': None}
 
-        self.floatAttributeNoColonExample    = 'xspace'
-        self.searchOutputFloatAttributeNoColonFloatExample = {'attribute': 'xspace', 'value': 256, 'line': 'xspace = 256 ;'}
+        self.attributeNoColonExample    = 'xspace'
+        self.searchOutputAttributeNoColonFloatExample = {'attribute': 'xspace', 'value': 256, 'line': 'xspace = 256 ;'}
 
     def tearDown(self):
         pass
@@ -46,6 +49,14 @@ class PyMincHeaderTest(unittest.TestCase):
         for key in result.keys():
             self.assertEqual(result[key], self.searchOutputFloatExample[key])
 
+    def test_that_verifies_output_values_of_int_attribute_search_match_known_case(self):
+        demoHeader = PyMincHeader('demo/demo.mnc')
+        result = demoHeader.search(self.intAttributeExample)
+
+        for key in result.keys():
+            self.assertEqual(result[key], self.searchOutputIntExample[key])
+        assert isinstance(result['value'],int)
+
     def test_that_verifies_output_values_of_string_attribute_search_match_known_case(self):
         demoHeader = PyMincHeader('demo/demo.mnc')
         result = demoHeader.search(self.stringAttributeExample)
@@ -60,9 +71,9 @@ class PyMincHeaderTest(unittest.TestCase):
         for key in result.keys():
             self.assertEqual(result[key], self.searchOutputNonExistingExample[key])
 
-    def test_that_verifies_output_values_of_float_attribute_without_no_colon_search_match_known_case(self):
+    def test_that_verifies_output_values_of_attribute_without_no_colon_search_match_known_case(self):
         demoHeader = PyMincHeader('demo/demo.mnc')
-        result = demoHeader.search(self.floatAttributeNoColonExample)
+        result = demoHeader.search(self.attributeNoColonExample)
 
         for key in result.keys():
-            self.assertEqual(result[key], self.searchOutputFloatAttributeNoColonFloatExample[key])
+            self.assertEqual(result[key], self.searchOutputAttributeNoColonFloatExample[key])

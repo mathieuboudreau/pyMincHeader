@@ -102,4 +102,13 @@ class PyMincHeader():
         except:
             self.value = self.stringValue[1:-1]
         else:
-            self.value = float(self.stringValue)
+            m = re.search(r'\.',self.stringValue)
+            if m:
+                self.value = float(self.stringValue)
+            else:
+               m = re.search(r'^[1-9]+$',self.stringValue)
+               if m:
+                   self.value = int(self.stringValue)
+               else:
+                   self.__resetobj()
+                   raise Exception('PyMincHeader.__convertValueStringToType: Could not match value to float or int using regex')
