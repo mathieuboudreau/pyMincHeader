@@ -34,9 +34,11 @@ All tests should be successful.
 
 ## Usage
 
+The following examples assumes that you are in the `/path/where/repo/was/cloned/pyMincHeader/` directory.
+
 * Import the class module:
 
-`from pymincheader import PyMincHeader`
+`from pymincheader.pymincheader import PyMincHeader`
 
 * Initiate an instance of the class:
 
@@ -48,9 +50,9 @@ All tests should be successful.
 
 `searchResults` will be a dictionary with 3 keys: `'value'`, `'attribute'`, and `'line'`. For this example case, the result is:
 
-* `searchResults[value]` = `2.3`
-* `searchResults[attribute]` = `'acquisition:repetition_time'`
-* `searchResults[line]` = `'acquisition:repetition_time = 2.3 ;'`
+* `searchResults['value']` = `2.3`
+* `searchResults['attribute']` = `'acquisition:repetition_time'`
+* `searchResults['line']` = `'acquisition:repetition_time = 2.3 ;'`
 
 If the search does not find an entry, the values will all be set to `None`
 
