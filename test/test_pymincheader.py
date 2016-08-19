@@ -48,6 +48,7 @@ class PyMincHeaderTest(unittest.TestCase):
 
         for key in result.keys():
             self.assertEqual(result[key], self.searchOutputFloatExample[key])
+        assert isinstance(result['value'],float)
 
     def test_that_verifies_output_values_of_int_attribute_search_match_known_case(self):
         demoHeader = PyMincHeader('demo/demo.mnc')
@@ -63,6 +64,7 @@ class PyMincHeaderTest(unittest.TestCase):
 
         for key in result.keys():
             self.assertEqual(result[key], self.searchOutputStringExample[key])
+        assert isinstance(result['value'],str)
 
     def test_that_verifies_output_values_of_float_attribute_search_match_when_no_match_occurs(self):
         demoHeader = PyMincHeader('demo/demo.mnc')
