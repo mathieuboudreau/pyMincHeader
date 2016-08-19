@@ -2,13 +2,19 @@
 
 pyMincHeader is a tool to fetch header information from MINC files in python.
 
+MINC is a file format used for medical imaging purposes that was developed at the McConnell Brain Imaging Centre in Montreal.
+
 ## Requirements
 
 * Python 3.5.0 or later
 
-* MINC tools
+* MINC Toolkit
 
-For more information about the Minc toolkit, visit the [software website](http://www.bic.mni.mcgill.ca/ServicesSoftware/MINC)
+For more information about the MINC Toolkit, visit the [software website](http://www.bic.mni.mcgill.ca/ServicesSoftware/MINC)
+and [wiki](https://en.wikibooks.org/wiki/MINC).
+
+To download the MINC Toolkit, visit the [software repository](http://bic-mni.github.io/) and follow the appropriate 
+instructions for your operating system.
 
 ## Installation
 
